@@ -1,0 +1,5 @@
+files:
+  - source: /Translation/Source/*.tsv
+    ignore:
+      - /Translations/en-suggest/
+    translation: /Translations/%locale%/%original_file_name%
