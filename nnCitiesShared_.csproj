@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net3.5</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+
+        <ManagedDLLPath>$(MSBuildProgramFiles32)/Steam/steamapps/common/Cities_Skylines/Cities_Data/Managed</ManagedDLLPath>
+        <AssemblySearchPaths>
+            $(AssemblySearchPaths);
+            $(ManagedDLLPath)
+        </AssemblySearchPaths>
+        <Configurations>Debug</Configurations>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Reference Include="Assembly-CSharp" />
+        <Reference Include="ColossalManaged" />
+        <Reference Include="ICities" />
+        <Reference Include="UnityEngine" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <EmbeddedResource Include="Translation\Source\*.tsv" />
+    </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Translation\KeyStrings.tt">
+			<Generator>TextTemplatingFileGenerator</Generator>
+			<LastGenOutput>KeyStrings.cs</LastGenOutput>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Translation\KeyStrings.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>KeyStrings.tt</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+</Project>
