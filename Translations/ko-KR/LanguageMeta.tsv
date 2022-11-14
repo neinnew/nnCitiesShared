@@ -1,7 +1,9 @@
 "Key"	"String"	"Context"
 "LANGUAGE_NAME:self"	"한국어"	"LANGUAGE_NAME:self
-readable native name "
+readable native name 
+***** this is the name of its own language *****"
 "LANGUAGE_NAME:de-DE"	"독일어"	""
+"LANGUAGE_NAME:en-EN"	"영어"	"***literally English***"
 "LANGUAGE_NAME:es-ES"	"스페인어"	""
 "LANGUAGE_NAME:fr-FR"	"프랑스어"	""
 "LANGUAGE_NAME:it-IT"	"이탈리아어"	""
