@@ -3,7 +3,6 @@ using System.IO;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Linq;
-using System.Text;
 using ColossalFramework.Globalization;
 using nnCitiesShared.Utilities;
 using UnityEngine;
