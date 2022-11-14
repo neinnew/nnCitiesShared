@@ -22,17 +22,17 @@
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Translation\KeyStrings.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-	  <LastGenOutput>KeyStrings.cs</LastGenOutput>
+      <LastGenOutput>KeyStrings.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>
-	  <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
-	</ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
   <ItemGroup>
-	  <Compile Update="Translation\KeyStrings.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>KeyStrings.tt</DependentUpon>
-	  </Compile>
-	</ItemGroup>
+    <Compile Update="Translation\KeyStrings.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>KeyStrings.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

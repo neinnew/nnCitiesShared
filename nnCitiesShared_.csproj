@@ -44,4 +44,8 @@
 	  </Compile>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="PolySharp" Version="1.7.1" />
+	</ItemGroup>
+
 </Project>
