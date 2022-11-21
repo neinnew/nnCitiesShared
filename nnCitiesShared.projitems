@@ -14,7 +14,7 @@
     <Folder Include="$(MSBuildThisFileDirectory)Utilities\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="**\*.cs" />
+    <Compile Include="..\nnCitiesShared\**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Translation\Source\*.tsv" />

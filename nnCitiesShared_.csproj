@@ -45,7 +45,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="PolySharp" Version="1.7.1" />
+	  <PackageReference Include="PolySharp" Version="1.8.0">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
 	</ItemGroup>
+	
+	<PropertyGroup>
+		<PolySharpIncludeGeneratedTypes>System.Runtime.CompilerServices.CallerArgumentExpressionAttribute</PolySharpIncludeGeneratedTypes>
+	</PropertyGroup>
 
 </Project>
