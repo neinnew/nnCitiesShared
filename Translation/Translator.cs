@@ -161,7 +161,7 @@ public class Translator
     
     private string? TryTranslate(string key)
     {
-        return _translations[Language][key];
+        return _translations.ContainsKey(Language) ? _translations[Language][key] : null;
     }
 
     private string? TryFallback(string key)
