@@ -45,6 +45,12 @@ public class Translator
         _instance = null;
     }
 
+    public static void Initialize()
+    {
+        LocaleManager.eventLocaleChanged += OnGameLocaleChanged;
+        if (UseGameLanguage) Language = GameLanguage;
+    }
+
     /// <summary>
     /// Get string by current language and given key.
     /// </summary>
@@ -119,8 +125,6 @@ public class Translator
         }
     }
     
-    
-    
     private void LoadTranslations()
     {
         var languages = Directory.GetDirectories(ResourcePath).Select(dir => new DirectoryInfo(dir).Name);
@@ -178,7 +182,12 @@ public class Translator
     {
         return _translations[code][key];
     }
-
+    
+    public static string GameLanguage => Instance.LanguageCodes
+                                             .Where(code => LocaleManager.instance.supportedLocaleIDs.Contains(code.Substring(0, 2)))
+                                             .FirstOrDefault(code => code.Substring(0, 2) == LocaleManager.instance.language) 
+                                         ?? DefaultLanguage;
+    
     private static void OnGameLocaleChanged()
     {
         if (!UseGameLanguage
@@ -188,75 +197,16 @@ public class Translator
             return;
         }
 
-        Language = Instance.LanguageCodes
-                       .Where(code => LocaleManager.instance.supportedLocaleIDs.Contains(code.Substring(0, 2)))
-                       .FirstOrDefault(code => code.Substring(0, 2) == LocaleManager.instance.language)
-                   ?? DefaultLanguage;
-
-        UpdateCustomUI();
+        Language = GameLanguage;
+        UpdateCustomUI?.Invoke();
     }
 
-    private static void Update()
+    public static void Update()
     {
-        UpdateSettingsUI();
-        UpdateCustomUI();
+        UpdateSettingsUI?.Invoke();
+        UpdateCustomUI?.Invoke();
     }
 
-    public static event Action UpdateCustomUI;
-    public static event Action UpdateSettingsUI;
-
-    public static void OnGameLanguageUsed()
-    {
-        UseGameLanguage = true;
-        OnGameLocaleChanged();
-        UpdateSettingsUI();
-    }
-
-    public static void OnLanguageChanged(int index)
-    {
-        UseGameLanguage = false;
-        Language = Instance.LanguageCodes[index];
-        Update();
-    }
+    public static event Action? UpdateCustomUI;
+    public static event Action? UpdateSettingsUI;
 }
-
-
-// Quick peek for dropdown use case.
-/* 
-public class ___
-{
-    void ____()
-    { 
-        UIHelper ui = new UIHelper(new UIPanel());
-        ui.AddDropdown("Select Language", GetOptions(), GetDefault(), i =>
-        {
-            if (i == 0)
-            {
-                Translator.OnGameLanguageUsed();
-            }
-            else
-            {
-                Translator.OnLanguageChanged(i - 1);
-            }
-            // Save();
-        });
-    }
-
-    int GetDefault()
-    {
-        return Array.FindIndex(Translator.Instance.LanguageCodes, code => code == Translator.Language) + 1;
-    }
-    
-    string[] GetOptions()
-    {
-        int length = Translator.Instance.LanguageCodes.Length + 1;
-        var result = new string[length];
-        result[0] = Translator.Instance["USE_GAME_LANGUAGE"];
-        for (int i = 1; i < length; i++)
-        {
-            result[i] = $"{Translator.Instance.LanguageNativeNames[i - 1]} ({Translator.Instance.LanguageCodes[i - 1]})";
-        }
-        return result;
-    }
-}
- */
