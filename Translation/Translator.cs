@@ -145,10 +145,12 @@ public class Translator
         {
             using var stream = AssemblyUtils.ThisAssembly.GetManifestResourceStream(source);
             using var reader = new StreamReader(stream!);
+            reader.ReadLine(); // skip first line (header)
             while (!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
                 if (line == null) break;
+                
                 _source.Add(line.Split('\t')[0].Trim('"'), line.Split('\t')[1].Trim('"'));
             }
         }

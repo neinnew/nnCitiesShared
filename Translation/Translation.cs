@@ -30,7 +30,7 @@ public class Translation
             foreach (var file in files)
             {
                 var lines = File.ReadAllLines(file);
-                var dict = lines.ToDictionary(key => key.Split('\t')[0].Trim('"'), value => value.Split('\t')[1].Trim('"'));
+                var dict = lines.Skip(1).ToDictionary(key => key.Split('\t')[0].Trim('"'), value => value.Split('\t')[1].Trim('"'));
                 translation = translation.Union(dict).ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
             }
             
