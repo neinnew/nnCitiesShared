@@ -161,15 +161,18 @@ public class Translator
     
     private string? TryTranslate(string key)
     {
-        return _translations.ContainsKey(Language) ? _translations[Language][key] : null;
+        return _translations.TryGetValue(Language, out var translation) ? translation[key] : null;
     }
 
     private string? TryFallback(string key)
     {
         foreach (var fallback in FallbackCodes)
         {
-            if (_translations[fallback][key] is string translated)
-                return translated;
+            if (_translations.TryGetValue(fallback, out var translation))
+            {
+                if (translation[key] is string translated)
+                    return translated;
+            }
         }
 
         return null;
